@@ -1,0 +1,42 @@
+Reactjs Setup
+
+1.Create a react project - npx create-react-app appname
+2.After the project is created delete the unwanted files (optional)
+3.Now add the router package for routing purpose  - npm install react-router-dom
+
+4.Now import the router package in the app.js file 
+  import {BrowserRouter, Routes, Route} from 'react-router-dom'
+
+5.Config the routing in the app.js 
+  <BrowserRouter>
+	<Routes>
+	<Route path="/name_of_the_path" element={page_name}></Route>
+     </Routes>
+ </BroserRouter>
+
+6.Now the create the folder for contains other pages (inside the src folder)
+7.Create the multiple pages 
+8.Import those pages for routing in the app.js file like- import Home from './pages/Home
+9.Now create another folder components, this is for the header , footer etc.., (inside the src folder)
+
+10.Now setup the header in the header.js file
+  import {Link} from 'react-router-dom' and config link by <Link to='/name_of_page'></Link>
+
+11.Adding Bootstrap or can we add react material UI
+ for Bootstrap - npm install react-bootstrap bootstrap
+  and import the bootstrap.css  in index.js file before the const root line
+(import 'bootstrap/dist/css/bootstrap.min.css';)
+
+12. Add img in page, create a asset folder inside src add images folder, paste the images
+
+13. Display image from local like,  <img
+                src={require("../assets/images/001-teamwork.png")}
+                width={55}
+                height={50}
+              ></img>
+
+
+
+
+
+

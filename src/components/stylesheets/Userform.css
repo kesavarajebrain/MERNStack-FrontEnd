@@ -1,0 +1,11 @@
+.container{
+    font-family: 'Montserrat', sans-serif;
+}
+
+button{
+    margin-top: 10px !important;
+}
+span{
+    font-size: small;
+    text-align: left !important;
+}

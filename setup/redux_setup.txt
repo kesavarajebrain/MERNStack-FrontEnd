@@ -1,0 +1,152 @@
+Redux setup 
+
+1. Install redux cmd - npm i redux react-redux
+2. 4 concepts in redux
+    
+    STORE - is the global one for manage the all data, only one store is there for all application.
+    ACTION - defines the actions what ever we perform using the redux like increment , decrement etc..,
+    REDUCER - write logics in this file, we can add multiple reducers in a project but we combine and pass in the store
+    DISPATCH - we send the corresponding function to perform using redux
+
+3. Create store first - import { createStore} from 'redux'; in index.js file
+4. Config the store with name and pass reducer in it -  const store = createStore(reducer)
+5. Create folder for redux in the src, redux folder inside this folder create actions and reducers folders.
+6. Now create index.js file in the reducers folder (is the root file of the multiple reducers)
+
+7. Create sample reducer file, counter reducer increment and decrement
+    //reducer have initial state and action as the parameter
+   // write swicth for perform the corresponding action
+  // export the reducer to several places
+
+ e.g
+   const counterReducer = (state = 0, action) =>{
+       switch(action.type){
+        case "INCREMENT" :
+            return state + 1;
+         case "DECREMENT" :
+            return state - 1;
+        default :
+           return state;
+}}
+export default counterReducer;
+
+8. Refer the 6th point , in the index file we combine all reducers
+
+   // import all reducers here we multiple means we import all here
+    import counterReducer from "./counterReducer";
+
+   //combine all the reducers 
+
+   import { combineReducers } from "redux";
+
+   // pass all the reducers as key value pair, we use key value for define reducer here after
+
+  const allReducers = combineReducers({
+    // left side is the reducer name
+    counter: counterReducer,
+   });
+
+    // export the reducer
+
+   export default allReducers;
+
+
+9. // import our root reducer (reducers index.js, we combined all reducers) in our main index.js file, ref 3 rd point.
+   import allReducers from './redux/reducers';
+
+10. Now pass the reducer to our store 
+
+    const store = createStore(allReducers)
+
+11. See the redux state management via chrome inspect
+
+    add readux devtools extension in chrome 
+
+  // add dev tool extension for redux to check redux in chrome (main index.js file)
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+   const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+  After this open inspect we can redux option to view the redux state.
+
+12. Now add provider (we provide the store to react for use store in react application)
+   import { Provider} from 'react-redux'
+
+13. Now give the provider tag for entire application (main index.js file)
+     <Provider>
+    <App />
+  </Provider>
+
+14. Add our store to provider
+   <provider store={store_name}>
+
+15.Use the value from redux or state (use this import and config we use this data in any page)
+  // import useselector for use the state data or redux store
+     import {useSelector} from 'react-redux';
+
+  // get the state value like this
+  const counter = useSelector(state=>state.counter)
+  console.log('COUNTER',counter)
+
+16. Now create the action file against reducer 
+
+  counterAction.js file 
+
+   export the funtions separetly 
+   export const increment = () =>{
+    return {
+        type:"INCREMENT" }}
+
+  export const decrement = () =>{
+    return {
+        type:"DECRMENT"}}
+        
+17.import action file and define all funtions used in the file in app.js or where we want
+  import {decrement,increment} from './redux/actions/counterAction';
+
+18.import usedispatch for send the action to redux then it will perform the action in app.js or where we want
+  import { useDispatch} from "react-redux";
+
+19.config the dispatch
+  const dispatch  = useDispatch()
+
+20. dispatch the action like
+<button onClick={()=>dispatch(increment())}>add</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

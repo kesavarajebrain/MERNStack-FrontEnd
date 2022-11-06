@@ -1,0 +1,43 @@
+
+input:focus, button:focus {
+    border: 1px solid var(--main-bg) !important;
+    box-shadow: none !important;
+  }
+  
+  .form-check-input:checked {
+    background-color: var(--main-bg) !important;
+    border-color: var(--main-bg) !important;
+  }
+  
+  .card, .btn, input{
+    border-radius:0 !important;
+  }
+
+  .error{
+    text-align: center;
+    font-weight: bold;
+    color: #c80606;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 5px;
+    background: #ff00000a;
+  }
+
+  .success{
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 5px;
+    background: #00800066;
+    color: green;
+  }
+
+  .password{
+    float: right;
+    z-index: 1;
+    position: relative;
+    margin-top: -2rem;
+    margin-right: 2%;
+  }
+  

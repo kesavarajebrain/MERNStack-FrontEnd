@@ -1,0 +1,26 @@
+.navbar-nav{
+    margin-left: 0%;
+  }
+@media only screen and (min-width: 992px) {
+    .navbar-nav{
+        margin-left: 5%;
+      }
+}
+   
+.mainNav{
+    padding: 0 !important;
+}
+.brandName{
+    color: black !important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.logOut{
+    color: black !important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-nav>a{
+    color: black !important;
+    font-family: 'Montserrat', sans-serif;
+}
