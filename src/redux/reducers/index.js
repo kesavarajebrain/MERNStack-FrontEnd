@@ -3,7 +3,7 @@ import counterReducer from "./counterReducer";
 import userReducer from "./userReducer";
 import authReducer from "./authReducer";
 import snackbarReducer from "./snackbarReducer"
-
+import spinnerReducer from "./spinnerReducer"
 //combine all the reducers
 import { combineReducers } from "redux";
 
@@ -13,7 +13,8 @@ const allReducers = combineReducers({
   counter: counterReducer,
   users:userReducer,
   authUser:authReducer,
-  snackBar:snackbarReducer
+  snackBar:snackbarReducer,
+  spinner:spinnerReducer
 });
 
 // export the reducer

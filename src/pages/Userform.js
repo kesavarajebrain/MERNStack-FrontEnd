@@ -23,7 +23,9 @@ import { useDispatch } from "react-redux";
 // use selector
 import { useSelector } from "react-redux";
 // snackbar action
-import {showSuccessSnackbar} from '../redux/actions/snackbarAction'
+import {showSuccessSnackbar} from '../redux/actions/snackbarAction';
+// spinner action
+import {hideSpinner,loadSpinner } from '../redux/actions/spinnerAction';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -35,7 +37,7 @@ function Userform() {
   const [response, setResponse] = useState(null);
   const [userdata, setUserdata] = useState(null);
   const [updateResponse, setUpdateResponse] = useState(null);
-  // spinner
+  // button spinner
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   // snackbar
@@ -66,11 +68,12 @@ function Userform() {
     }),
 
     onSubmit: async (formData) => {
-      // spinner
+      // button spinner
       if (!loading) {
         setSuccess(false);
         setLoading(true);
       }
+      dispatch(loadSpinner())
       console.log(formData);
       formData.admin_id = authToken.userLog._id
       // post data to api
@@ -89,13 +92,15 @@ function Userform() {
       console.log(json.data);
       if (!response.ok) {
         seterror(json.error);
+        dispatch(hideSpinner())
       }
       if (response.ok) {
         // after created a new user diapatch this
         dispatch(createdUser(json.data));
         // reset form
         formik.resetForm();
-        //spinner
+        dispatch(hideSpinner())
+        //button spinner
         setSuccess(true);
         setLoading(false);
         // snackbar
@@ -120,6 +125,7 @@ function Userform() {
 
   // Update user
   const updateUser = async (data) => {
+    dispatch(loadSpinner())
     data._id = edit_user._id;
     console.log("UPDATE User", data);
     const response = await fetch("/user/updateUserById", {
@@ -136,6 +142,7 @@ function Userform() {
       console.log(json);
       dispatch(updateSingleUser(json.result));
       dispatch(showSuccessSnackbar(json.result))
+      dispatch(hideSpinner())
       setUpdateResponse(json);
       // console.log(setResponse)
     }

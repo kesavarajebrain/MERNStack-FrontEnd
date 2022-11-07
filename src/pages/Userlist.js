@@ -16,8 +16,10 @@ import { useDispatch,useSelector } from "react-redux";
 // showing the date like real time app
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 // snackbar action
-import {showSuccessSnackbar} from '../redux/actions/snackbarAction'
-// const Alert = React.forwardRef(function Alert(props, ref) {
+import {showSuccessSnackbar} from '../redux/actions/snackbarAction';
+// spinner action
+import { loadSpinner,hideSpinner} from '../redux/actions/spinnerAction';
+ // const Alert = React.forwardRef(function Alert(props, ref) {
 //   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 // });
 
@@ -26,6 +28,7 @@ function Userlist({ userData }) {
   const user = useSelector((state) => state.authUser);
   // delete user funtion
   const deleteUser = async (userData) => {
+    dispatch(loadSpinner())
     console.log(userData);
     const delData = {
       _id: userData._id,
@@ -43,6 +46,7 @@ function Userlist({ userData }) {
     if (response.ok) {
       dispatch(deleteSingleUser(json.result));
       dispatch(showSuccessSnackbar(json.Msg))
+      dispatch(hideSpinner())
       // openToast();
       // setResponse(json.Msg);
       // console.log(setResponse)
@@ -51,7 +55,6 @@ function Userlist({ userData }) {
 
   // edit user 
   const editUser = async(userData) =>{
-    console.log(userData);
     await dispatch(editSingleUser(userData))
   }
 

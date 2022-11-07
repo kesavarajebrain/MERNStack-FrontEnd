@@ -7,8 +7,6 @@ import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 // mui icon
 import ErrorTwoToneIcon from "@mui/icons-material/ErrorTwoTone";
 import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
@@ -20,12 +18,14 @@ import { useDispatch } from "react-redux";
 // action
 import { loginAdmin } from "../redux/actions/authAction";
 // navigate to one page to other
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // show hide password
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 // snackbar action
-import {showSuccessSnackbar} from '../redux/actions/snackbarAction'
+import {showSuccessSnackbar} from '../redux/actions/snackbarAction';
+// spinner action
+import {hideSpinner,loadSpinner } from '../redux/actions/spinnerAction';
 // snackbar
 // const Alert = React.forwardRef(function Alert(props, ref) {
 //   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -48,8 +48,6 @@ function Auth() {
   const toggleTwo = () => {
     setVisibleTwo(!isVisibleTwo);
   };
-  // snackbar
-  const [openSnackBar, setOpenSnackBr] = React.useState();
   //formik
   const formik = useFormik({
     initialValues: {
@@ -68,6 +66,7 @@ function Auth() {
     }),
 
     onSubmit: async (formData) => {
+      dispatch(loadSpinner())
       console.log(formData);
       // api call
       const logData = formData;
@@ -80,6 +79,7 @@ function Auth() {
       });
       const json = await response.json();
       if (!response.ok) {
+        dispatch(hideSpinner())
         // set error to state
         setError(json.msg);
         // clear the error msg after 5sec
@@ -89,6 +89,7 @@ function Auth() {
       }
       if (response.ok) {
         dispatch(loginAdmin(json));
+        dispatch(hideSpinner())
         dispatch(showSuccessSnackbar(json.result))
         // save response in local storage
         localStorage.setItem("user", JSON.stringify(json));
@@ -104,27 +105,15 @@ function Auth() {
     },
   });
 
-  // snackbar
-  const openToast = () => {
-    setOpenSnackBr({ vertical: "bottom", horizontal: "right" });
-  };
-
-  const closeSnackBar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackBr(false);
-  };
-
   // state for show hide
   const [signDiv, setSignDivState] = React.useState(false);
   // sign up call
 
   const signNewAdmin = async (data) => {
-    if (data.name == "" || data.email == "" || data.password == "")
+    if (data.name === "" || data.email === "" || data.password === "")
       formik.handleSubmit();
     else {
+      dispatch(loadSpinner())
       // api call
       const postData = data;
       const postResponse = await fetch("/admin/addNewAdmin", {
@@ -138,6 +127,7 @@ function Auth() {
       if (!postResponse.ok) {
         // set error to state
         setError(postJson.msg);
+        dispatch(hideSpinner())
         // clear the error msg after 5sec
         setTimeout(() => {
           setError("");
@@ -150,6 +140,7 @@ function Auth() {
           setSuccess("");
         }, 3000);
         dispatch(loginAdmin(postJson));
+        dispatch(hideSpinner())
         // save response in local storage
         localStorage.setItem("user", JSON.stringify(postJson));
         // route to page

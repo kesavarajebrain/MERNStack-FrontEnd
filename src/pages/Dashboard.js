@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { setUsers } from "../redux/actions/userAction";
 // snackbar action
 import {showSuccessSnackbar} from '../redux/actions/snackbarAction';
+// spinner action
+import {hideSpinner,loadSpinner } from '../redux/actions/spinnerAction'
 // import usedispatch for send the action to redux then it will perform the action
 import { useDispatch } from "react-redux";
 //mui
@@ -37,6 +39,7 @@ function Dashboard() {
       admin_id: authToken.userLog._id,
     };
     const fetchUsers = async () => {
+      dispatch(loadSpinner())
       const response = await fetch("/user/getAllUsers", {
         // send logged user Id
         method: "POST",
@@ -52,6 +55,7 @@ function Dashboard() {
       console.log(json.data);
       if (response.ok) {
         dispatch(setUsers(json.data));
+        dispatch(hideSpinner())
         // dispatch(showSuccessSnackbar(json.result));
         // setAllUsers(json.data, json.result);
       }

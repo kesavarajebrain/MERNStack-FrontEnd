@@ -29,6 +29,7 @@ Reactjs Setup
 
 12. Add img in page, create a asset folder inside src add images folder, paste the images
 
+
 13. Display image from local like,  <img
                 src={require("../assets/images/001-teamwork.png")}
                 width={55}

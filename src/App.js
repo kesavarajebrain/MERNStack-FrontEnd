@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import { loginAdmin } from "../src/redux/actions/authAction";
 // common snackbar
 import SnackbarSuccess from "./components/SnackbarSuccess";
+import Spinner from "./components/Spinner";
 // config custom things for mui
 const theme = createMuiTheme({
   typography: {
@@ -43,6 +44,8 @@ function App() {
       <div className="App">
         {/* common snackbar */}
         <SnackbarSuccess/>
+        {/* common spinner */}
+        <Spinner/>
         <BrowserRouter>
           {/* Add header here */}
           {/* show the header only authuser gets a proper value */}
