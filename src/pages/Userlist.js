@@ -17,6 +17,8 @@ import { useDispatch,useSelector } from "react-redux";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 // snackbar action
 import {showSuccessSnackbar} from '../redux/actions/snackbarAction';
+// api
+import { API_URL } from "../api/api.config";
 // spinner action
 import { loadSpinner,hideSpinner} from '../redux/actions/spinnerAction';
  // const Alert = React.forwardRef(function Alert(props, ref) {
@@ -33,7 +35,7 @@ function Userlist({ userData }) {
     const delData = {
       _id: userData._id,
     };
-    const response = await fetch("/user/deleteUserById", {
+    const response = await fetch(`${API_URL}/user/deleteUserById`, {
       method: "POST",
       body: JSON.stringify(delData),
       headers: {

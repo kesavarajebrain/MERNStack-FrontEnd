@@ -1,0 +1,1 @@
+export const API_URL  = 'https://mern-backend-5tkm.onrender.com';

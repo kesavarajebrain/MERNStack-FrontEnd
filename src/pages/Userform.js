@@ -24,6 +24,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 // snackbar action
 import {showSuccessSnackbar} from '../redux/actions/snackbarAction';
+//api 
+import { API_URL } from "../api/api.config";
 // spinner action
 import {hideSpinner,loadSpinner } from '../redux/actions/spinnerAction';
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -78,7 +80,7 @@ function Userform() {
       formData.admin_id = authToken.userLog._id
       // post data to api
       const user = formData;
-      const response = await fetch("/user/addNewUser", {
+      const response = await fetch(`${API_URL}/user/addNewUser`, {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
@@ -128,7 +130,7 @@ function Userform() {
     dispatch(loadSpinner())
     data._id = edit_user._id;
     console.log("UPDATE User", data);
-    const response = await fetch("/user/updateUserById", {
+    const response = await fetch(`${API_URL}/user/updateUserById`, {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {

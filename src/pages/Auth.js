@@ -26,6 +26,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {showSuccessSnackbar} from '../redux/actions/snackbarAction';
 // spinner action
 import {hideSpinner,loadSpinner } from '../redux/actions/spinnerAction';
+// env 
+import {API_URL} from '../api/api.config'
 // snackbar
 // const Alert = React.forwardRef(function Alert(props, ref) {
 //   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -70,7 +72,7 @@ function Auth() {
       console.log(formData);
       // api call
       const logData = formData;
-      const response = await fetch("/admin/adminLogin", {
+      const response = await fetch(`${API_URL}/admin/adminLogin`, {
         method: "POST",
         body: JSON.stringify(logData),
         headers: {
@@ -116,7 +118,7 @@ function Auth() {
       dispatch(loadSpinner())
       // api call
       const postData = data;
-      const postResponse = await fetch("/admin/addNewAdmin", {
+      const postResponse = await fetch(`${API_URL}/admin/addNewAdmin`, {
         method: "POST",
         body: JSON.stringify(postData),
         headers: {

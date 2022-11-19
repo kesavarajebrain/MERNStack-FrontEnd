@@ -18,6 +18,8 @@ import Alert from "@mui/material/Alert";
 // import other pages
 import Userlist from "./Userlist";
 import Userform from "./Userform";
+// api 
+import { API_URL } from "../api/api.config";
 // spinner
 import Spinner from "../components/Spinner";
 
@@ -40,7 +42,7 @@ function Dashboard() {
     };
     const fetchUsers = async () => {
       dispatch(loadSpinner())
-      const response = await fetch("/user/getAllUsers", {
+      const response = await fetch(`${API_URL}/user/getAllUsers`, {
         // send logged user Id
         method: "POST",
         body: JSON.stringify(sendAdmindata),
