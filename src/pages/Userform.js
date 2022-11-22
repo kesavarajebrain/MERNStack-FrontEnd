@@ -84,6 +84,7 @@ function Userform() {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
+          "access-control-allow-origin" : "*",
           "Content-Type": "application/json",
           "Authorization": `Bearer ${authToken.token}`
         },
@@ -134,6 +135,7 @@ function Userform() {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
+        "access-control-allow-origin" : "*",
         "Content-Type": "application/json",
         'Authorization':`Bearer ${authToken.token}`
       },

@@ -27,7 +27,7 @@ import {showSuccessSnackbar} from '../redux/actions/snackbarAction';
 // spinner action
 import {hideSpinner,loadSpinner } from '../redux/actions/spinnerAction';
 // env 
-import {API_URL} from '../api/api.config'
+import {API_URL,HEADER} from '../api/api.config'
 // snackbar
 // const Alert = React.forwardRef(function Alert(props, ref) {
 //   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -75,9 +75,7 @@ function Auth() {
       const response = await fetch(`${API_URL}/admin/adminLogin`, {
         method: "POST",
         body: JSON.stringify(logData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: HEADER
       });
       const json = await response.json();
       if (!response.ok) {
@@ -121,9 +119,7 @@ function Auth() {
       const postResponse = await fetch(`${API_URL}/admin/addNewAdmin`, {
         method: "POST",
         body: JSON.stringify(postData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: HEADER
       });
       const postJson = await postResponse.json();
       if (!postResponse.ok) {

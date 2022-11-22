@@ -39,6 +39,7 @@ function Userlist({ userData }) {
       method: "POST",
       body: JSON.stringify(delData),
       headers: {
+        "access-control-allow-origin" : "*",
         "Content-Type": "application/json",
         "Authorization":`Bearer ${user.token}`
       },

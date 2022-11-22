@@ -19,7 +19,7 @@ import Alert from "@mui/material/Alert";
 import Userlist from "./Userlist";
 import Userform from "./Userform";
 // api 
-import { API_URL } from "../api/api.config";
+import { API_URL,HEADER } from "../api/api.config";
 // spinner
 import Spinner from "../components/Spinner";
 
@@ -47,6 +47,7 @@ function Dashboard() {
         method: "POST",
         body: JSON.stringify(sendAdmindata),
         headers: {
+          "access-control-allow-origin" : "*",
           "Content-Type": "application/json",
           Authorization: `Bearer ${authToken.token}`,
         },
